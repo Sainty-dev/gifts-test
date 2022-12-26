@@ -6,15 +6,15 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default async function (req, res) {
-  const {queryText} = req.body;
+  const {hobbies} = req.body;
   const completion = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: generatePrompt(queryText),
+    prompt: generatePrompt(hobbies),
     temperature: 0.6,
     max_tokens: 2048,
   });
   res.status(200).json({ result: completion.data.choices[0].text });
 }
-function generatePrompt(queryText) {
-  return `${queryText}.`;
+function generatePrompt(hobbies) {
+  return `${hobbies}.`;
 }
